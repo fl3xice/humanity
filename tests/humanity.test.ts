@@ -84,3 +84,9 @@ Deno.test("Custom Locale", () => {
     assertEquals(Humanity.number(100000), "100 tis", "100 thousand");
     assertEquals(Humanity.number(1000000), "1 er", "1 million");
 });
+
+Deno.test("Disabling features", () => {
+    const Humanity = createHumanity();
+    Humanity.disable("spacing");
+    assertEquals(Humanity.number(100000), "100thousand", "100 thousand");
+});

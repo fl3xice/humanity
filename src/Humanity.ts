@@ -1,9 +1,11 @@
 import { en_US, ru_RU, de_DE, LocaleObject } from "./Locales.ts";
 
+export type Feature = "spacing";
 export type LocaleHumanity = "ru_RU" | "en_US" | "de_DE" | "custom";
 
 class Humanity {
     private localeObject: LocaleObject;
+    private withSpace = true;
 
     /**
      * Constructor for setting locale
@@ -14,6 +16,25 @@ class Humanity {
             this.localeObject = customLocale;
         } else {
             this.localeObject = this.getLocale(locale);
+        }
+    }
+
+    /**
+     * Disable functionality of features
+     * ```typescript
+     * // This feature disable space between number and word
+     * const Humanity = createHumanity();
+     * Humanity.disable("spacing");
+     * console.log(Humanity.number(100000));
+     * // Output: 100thousand
+     * ```
+     * @param feature Feature to be used
+     */
+    disable(feature: Feature) {
+        switch (feature) {
+            case "spacing":
+                this.withSpace = false;
+                break;
         }
     }
 
@@ -130,9 +151,11 @@ class Humanity {
         }
 
         if (this.localeObject.declinations) {
-            return `${numberStr} ${nameOfNumber}${this.localeObject.declinations[declination]}`;
+            return `${numberStr}${this.withSpace ? " " : ""}${nameOfNumber}${
+                this.localeObject.declinations[declination]
+            }`;
         } else {
-            return `${numberStr} ${nameOfNumber}`;
+            return `${numberStr}${this.withSpace ? " " : ""}${nameOfNumber}`;
         }
     }
 }
