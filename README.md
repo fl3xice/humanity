@@ -10,8 +10,27 @@ Humanity is a library for humanizing data in a human-readable form.
 
 ## How to use
 
+### Deno
+
 ```typescript
 import { createHumanity } from "https://deno.land/x/humanity/mod.ts";
+
+const Humanity = createHumanity("en_US");
+
+console.log(Humanity.number(500000)); // 500 000
+// Output: 500 thousand
+```
+
+### NodeJS
+
+You can use it library with NodeJS
+
+```
+npm i humanity-deno
+```
+
+```javascript
+const { createHumanity } = require("humanity-deno");
 
 const Humanity = createHumanity("en_US");
 
