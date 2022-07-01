@@ -54,6 +54,7 @@ Deno.test("Ru Locale with declinations", () => {
     assertEquals(Humanity.number(1), "1", "one");
     assertEquals(Humanity.number(100000), "100 тысяч", "100 thousand");
     assertEquals(Humanity.number(2000000), "2 миллиона", "2 million");
+    assertEquals(Humanity.number(30000000), "30 миллионов", "30 million");
     assertEquals(
         Humanity.number(1000000000000000000),
         "1 квинтиллион",

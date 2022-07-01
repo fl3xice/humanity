@@ -4,6 +4,7 @@
 
 export interface DeclinationLocale {
     useDeclination?: boolean;
+    useCountZerosAfterFirstDigit?: boolean;
     declinations?: {
         plural: string;
         singular: string;
@@ -26,6 +27,7 @@ export interface LocaleObject extends DeclinationLocale {
 export const ru_RU: LocaleObject = {
     locale: "ru_RU",
     useDeclination: true,
+    useCountZerosAfterFirstDigit: true,
     declinations: {
         plural: "ов",
         pluar_singular: "а",

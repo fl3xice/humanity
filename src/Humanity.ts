@@ -52,8 +52,17 @@ class Humanity {
     }
 
     private declinationNumbers(
-        n: number | bigint
+        n: number | bigint,
+        lenZeros: number
     ): "plural" | "singular" | "pluar_singular" {
+        if (
+            this.localeObject.useCountZerosAfterFirstDigit == true &&
+            lenZeros % 3 > 0 &&
+            lenZeros > 5
+        ) {
+            return "plural";
+        }
+
         if (n == 1) {
             return "singular";
         }
@@ -140,7 +149,7 @@ class Humanity {
         const firstDigit =
             typeof n == "bigint" ? BigInt(number[0]) : Number(number[0]);
 
-        const declination = this.declinationNumbers(firstDigit);
+        const declination = this.declinationNumbers(firstDigit, lenZeros);
 
         const zeros = this.getZerosByCountZeros(lenZeros);
         const numberStr = firstDigit + zeros;
