@@ -65,7 +65,16 @@ Humanity.disableFeature("spacing");
 console.log(Humanity.number(500000)); // 500thousand
 ```
 
+## Available functions
+
+-   number(n: number | bigint): string <br/> `Humanity.number(500000) // 500 thousand`
+-   truncate(n: string | number | bigint, lengthMax: number): string <br/> `Humanity.truncate("Humanity is a library for humanizing data in a human-readable form.", 24) // "Humanity is a library fo..."`
+-   toRoman(n: number): string <br/> `Humanity.toRoman(505) // DV`
+-   binarySuffix(n: number): string <br/> `Humanity.binarySuffix(500, 0) // 500 B`
+
 ## Supported languages by default
+
+_You can customize defaults the language and create yourself language_
 
 -   `en_US`
 -   `de_DE`
