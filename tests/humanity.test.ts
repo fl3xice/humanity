@@ -105,7 +105,7 @@ Deno.test("Custom Locale", () => {
 
 Deno.test("Disabling features", () => {
     const Humanity = createHumanity();
-    Humanity.disable("spacing");
+    Humanity.disableFeature("spacing");
     assertEquals(Humanity.number(100000), "100thousand", "100 thousand");
 });
 
@@ -178,5 +178,27 @@ Deno.test("Test humanity class", () => {
         Humanity.number(1000000000000000000000n),
         "1 sextillion",
         "1 sextillion"
+    );
+});
+
+Deno.test("String and Number truncate", () => {
+    assertEquals(Humanity.truncate("123456789", 5), "12345...");
+    assertEquals(Humanity.truncate(123456789, 5), "12345...");
+    assertEquals(
+        Humanity.truncate(
+            "Humanity is a library for humanizing data in a human-readable form.",
+            24
+        ),
+        "Humanity is a library fo..."
+    );
+});
+
+Deno.test("Roman numbers", () => {
+    assertEquals(Humanity.toRoman(1), "I");
+    assertEquals(Humanity.toRoman(50), "L");
+    assertEquals(Humanity.toRoman(505), "DV");
+    assertEquals(
+        Humanity.toRoman(54481),
+        "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMCDLXXXI"
     );
 });

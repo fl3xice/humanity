@@ -24,13 +24,13 @@ class Humanity {
      * ```typescript
      * // This feature disable space between number and word
      * const Humanity = createHumanity();
-     * Humanity.disable("spacing");
+     * Humanity.disableFeature("spacing");
      * console.log(Humanity.number(100000));
      * // Output: 100thousand
      * ```
      * @param feature Feature to be used
      */
-    disable(feature: Feature) {
+    disableFeature(feature: Feature) {
         switch (feature) {
             case "spacing":
                 this.withSpace = false;
@@ -134,6 +134,66 @@ class Humanity {
         } else {
             return `${numberStr}${this.withSpace ? " " : ""}${nameOfNumber}`;
         }
+    }
+
+    /**
+     * Truncate string to max length and paste in end '...'
+     * ```typescript
+     *  const str = Humanity.truncate(
+     *      "Humanity is a library for humanizing data in a human-readable form.",
+     *      24
+     *  );
+     *
+     *  console.log(str);
+     *
+     * // Output: Humanity is a library fo...
+     * ```
+     * @param n Number to be converted to a string
+     * @param lengthMax
+     * @returns string
+     */
+    truncate(n: string | number | bigint, lengthMax: number): string {
+        if (typeof n == "number") {
+            n = n.toString();
+        }
+        if (typeof n == "bigint") {
+            n = n.toString();
+        }
+        if (n.length > lengthMax) {
+            return n.substring(0, lengthMax) + "...";
+        }
+        return n;
+    }
+
+    /**
+     * Convert arabic number to roman roman numerals
+     * @param n Number to be converted to a roman numerals
+     * @returns string
+     */
+    toRoman(n: number): string {
+        const roman = {
+            M: 1000,
+            CM: 900,
+            D: 500,
+            CD: 400,
+            C: 100,
+            XC: 90,
+            L: 50,
+            XL: 40,
+            X: 10,
+            IX: 9,
+            V: 5,
+            IV: 4,
+            I: 1,
+        };
+        let romanNum = "";
+        for (const [key, value] of Object.entries(roman)) {
+            while (n >= value) {
+                romanNum += key;
+                n -= value;
+            }
+        }
+        return romanNum;
     }
 }
 

@@ -61,7 +61,7 @@ console.log(Humanity.number(500000)); // 500 th
 ## Disable spaces between number and word
 
 ```typescript
-Humanity.disable("spacing");
+Humanity.disableFeature("spacing");
 console.log(Humanity.number(500000)); // 500thousand
 ```
 
