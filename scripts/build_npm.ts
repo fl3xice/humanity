@@ -12,6 +12,15 @@ await build({
     package: {
         name: "humanity-deno",
         version: Deno.args[0],
+        keywords: [
+            "humanity",
+            "npm",
+            "deno",
+            "humanize",
+            "roman",
+            "binarysuffix",
+            "humanity-deno",
+        ],
         description:
             "Humanity is a library for humanizing data in a human-readable form.",
         license: "AGPL-3.0",
