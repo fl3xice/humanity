@@ -5,6 +5,8 @@ import Humanity, {
     createHumanity,
 } from "../src/Humanity.ts";
 
+import { DefaultLocales } from "../mod.ts";
+
 Deno.test("Test humanity class", () => {
     assertEquals(Humanity.number(1), "1", "one");
     assertEquals(Humanity.number(100000), "100 thousand", "100 thousand");
@@ -200,5 +202,26 @@ Deno.test("Roman numbers", () => {
     assertEquals(
         Humanity.toRoman(54481),
         "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMCDLXXXI"
+    );
+});
+
+Deno.test("Binary suffix", () => {
+    assertEquals(Humanity.binarySuffix(0), "0 B");
+    assertEquals(Humanity.binarySuffix(1), "1.00 B");
+    assertEquals(Humanity.binarySuffix(1024, 0), "1 KB");
+    assertEquals(Humanity.binarySuffix(1025), "1.00 KB");
+    assertEquals(Humanity.binarySuffix(25451215, 0), "24 MB");
+});
+
+Deno.test("Custom English", () => {
+    const CustomEnglish = DefaultLocales.en_US;
+
+    CustomEnglish.binarySuffixes = {
+        Bytes: "bytes",
+    };
+
+    assertEquals(
+        createCustomHumanity(CustomEnglish).binarySuffix(25, 0),
+        "25 bytes"
     );
 });

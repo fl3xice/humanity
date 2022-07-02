@@ -8,4 +8,5 @@ export type {
     DeclinationLocale,
     LocaleObject,
     NumberType,
+    BinarySuffixes,
 } from "./src/Locales.ts";

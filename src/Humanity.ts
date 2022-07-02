@@ -7,6 +7,8 @@ class Humanity {
     private localeObject: LocaleObject;
     private withSpace = true;
 
+    private suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+
     /**
      * Constructor for setting locale
      * @param locale Locale to be used
@@ -16,6 +18,14 @@ class Humanity {
             this.localeObject = customLocale;
         } else {
             this.localeObject = this.getLocale(locale);
+        }
+
+        // Replace suffixes on custom suffixes
+        if (this.localeObject.binarySuffixes !== undefined) {
+            const newSuffixes = Object.values(this.localeObject.binarySuffixes);
+            this.suffixes.forEach((x, i) => {
+                this.suffixes[i] = newSuffixes[i] ? newSuffixes[i] : x;
+            });
         }
     }
 
@@ -128,12 +138,16 @@ class Humanity {
         }
 
         if (this.localeObject.declinations) {
-            return `${numberStr}${this.withSpace ? " " : ""}${nameOfNumber}${
+            return `${numberStr}${this.spaceIf()}${nameOfNumber}${
                 this.localeObject.declinations[declination]
             }`;
         } else {
-            return `${numberStr}${this.withSpace ? " " : ""}${nameOfNumber}`;
+            return `${numberStr}${this.spaceIf()}${nameOfNumber}`;
         }
+    }
+
+    private spaceIf() {
+        return this.withSpace ? " " : "";
     }
 
     /**
@@ -194,6 +208,31 @@ class Humanity {
             }
         }
         return romanNum;
+    }
+
+    /**
+     * Convert bytes to human readable format
+     * ### Example
+     * 0 B
+     *
+     * 1.00 B
+     *
+     * 1.00 KB
+     *
+     * 1.00 KB
+     * @param bytes Number of bytes
+     * @param fixed Number of decimal places
+     * @returns string
+     */
+    binarySuffix(bytes: number, fixed = 2): string {
+        if (bytes == 0) {
+            return `0${this.spaceIf()}${this.suffixes[0]}`;
+        }
+
+        const i = Math.floor(Math.log(bytes) / Math.log(1024));
+        return `${(bytes / Math.pow(1024, i)).toFixed(fixed)}${this.spaceIf()}${
+            this.suffixes[i]
+        }`;
     }
 }
 

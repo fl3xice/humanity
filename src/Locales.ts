@@ -21,9 +21,22 @@ export type NumberType =
     | "quintillion"
     | "sexillion";
 
+export type BinarySuffixes = {
+    Bytes?: string;
+    KiloBytes?: string;
+    MegaBytes?: string;
+    GigaBytes?: string;
+    TeraBytes?: string;
+    PetaBytes?: string;
+    ExaBytes?: string;
+    ZettaBytes?: string;
+    YottaBytes?: string;
+};
+
 export interface LocaleObject extends DeclinationLocale {
     locale: string;
     excludeNumbers?: NumberType[];
+    binarySuffixes?: BinarySuffixes;
     numbers: Record<NumberType, string>;
 }
 
