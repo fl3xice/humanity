@@ -108,3 +108,75 @@ Deno.test("Disabling features", () => {
     Humanity.disable("spacing");
     assertEquals(Humanity.number(100000), "100thousand", "100 thousand");
 });
+
+Deno.test("Test humanity class", () => {
+    const Humanity = createCustomHumanity({
+        locale: "custom",
+        excludeNumbers: ["billion"],
+        numbers: {
+            thousand: "thousand",
+            million: "million",
+            billion: "billion",
+            trillion: "trillion",
+            quadrillion: "quadrillion",
+            quintillion: "quintillion",
+            sexillion: "sextillion",
+        },
+    });
+    assertEquals(Humanity.number(1), "1", "one");
+    assertEquals(Humanity.number(100000), "100 thousand", "100 thousand");
+    assertEquals(Humanity.number(1000000), "1 million", "1 million");
+    assertEquals(Humanity.number(10000000), "10 million", "10 million");
+    assertEquals(Humanity.number(100000000), "100 million", "100 million");
+    assertEquals(Humanity.number(1000000000), "1000000000", "1 billion");
+    assertEquals(Humanity.number(10000000000), "10000000000", "10 billion");
+    assertEquals(Humanity.number(100000000000), "100000000000", "100 billion");
+    assertEquals(Humanity.number(1000000000000), "1 trillion", "1 trillion");
+    assertEquals(Humanity.number(10000000000000), "10 trillion", "10 trillion");
+    assertEquals(
+        Humanity.number(100000000000000),
+        "100 trillion",
+        "100 trillion"
+    );
+    assertEquals(
+        Humanity.number(1000000000000000),
+        "1 quadrillion",
+        "1 quadrillion"
+    );
+    assertEquals(
+        Humanity.number(10000000000000000n),
+        "10 quadrillion",
+        "10 quadrillion"
+    );
+    assertEquals(
+        Humanity.number(100000000000000000n),
+        "100 quadrillion",
+        "100 quadrillion"
+    );
+    assertEquals(
+        Humanity.number(1000000000000000000n),
+        "1 quintillion",
+        "1 quintillion"
+    );
+    assertEquals(Humanity.number(2500000), "2 million", "2 million");
+    // 2 000 000 000
+    assertEquals(Humanity.number(2500000000), "2500000000", "2 billion");
+    // 200 000 000 000
+    assertEquals(Humanity.number(250000000000), "250000000000", "200 billion");
+
+    assertEquals(
+        Humanity.number(10000000000000000000n),
+        "10 quintillion",
+        "10 quintillion"
+    );
+    assertEquals(
+        Humanity.number(100000000000000000000n),
+        "100 quintillion",
+        "100 quintillion"
+    );
+    assertEquals(
+        Humanity.number(1000000000000000000000n),
+        "1 sextillion",
+        "1 sextillion"
+    );
+});

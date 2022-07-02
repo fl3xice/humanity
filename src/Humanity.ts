@@ -89,9 +89,15 @@ class Humanity {
             return lenZeros.toString();
         }
 
-        return Object.values(this.localeObject.numbers)[
-            Math.floor(lenZeros / 3) - 1
-        ];
+        const found = Math.floor(lenZeros / 3) - 1;
+        if (
+            this.localeObject.excludeNumbers &&
+            this.localeObject.excludeNumbers.some((x) => x == numbers[found])
+        ) {
+            return lenZeros.toString();
+        }
+
+        return Object.values(this.localeObject.numbers)[found];
     }
 
     /**

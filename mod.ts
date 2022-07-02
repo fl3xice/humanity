@@ -7,5 +7,5 @@ export const DefaultLocales = { de_DE, en_US, ru_RU };
 export type {
     DeclinationLocale,
     LocaleObject,
-    Numbers,
+    NumberType,
 } from "./src/Locales.ts";

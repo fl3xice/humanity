@@ -12,7 +12,7 @@ export interface DeclinationLocale {
     };
 }
 
-export type Numbers =
+export type NumberType =
     | "thousand"
     | "million"
     | "billion"
@@ -23,13 +23,12 @@ export type Numbers =
 
 export interface LocaleObject extends DeclinationLocale {
     locale: string;
-    excludeNumbers?: Numbers[];
-    numbers: Record<Numbers, string>;
+    excludeNumbers?: NumberType[];
+    numbers: Record<NumberType, string>;
 }
 
 export const ru_RU: LocaleObject = {
     locale: "ru_RU",
-    excludeNumbers: ["billion", "million", "thousand"],
     useDeclination: true,
     useCountZerosAfterFirstDigit: true,
     declinations: {
