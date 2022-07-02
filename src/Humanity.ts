@@ -84,52 +84,9 @@ class Humanity {
     }
 
     private switchWord(lenZeros: number): string {
-        switch (lenZeros) {
-            case 5:
-                // 100 000
-                return this.localeObject.numbers.thousand;
-            case 6:
-                // 1 000 000
-                return this.localeObject.numbers.million;
-            case 7:
-                // 10 000 000
-                return this.localeObject.numbers.million;
-            case 8:
-                // 100 000 000
-                return this.localeObject.numbers.million;
-            case 9:
-                // 1 000 000 000
-                return this.localeObject.numbers.billion;
-            case 10:
-                // 10 000 000 000
-                return this.localeObject.numbers.billion;
-            case 11:
-                // 100 000 000 000
-                return this.localeObject.numbers.billion;
-            case 12:
-                // 1 000 000 000 000
-                return this.localeObject.numbers.trillion;
-            case 13:
-                // 10 000 000 000 000
-                return this.localeObject.numbers.trillion;
-            case 14:
-                // 100 000 000 000 000
-                return this.localeObject.numbers.trillion;
-            case 15:
-                // 1 000 000 000 000 000
-                return this.localeObject.numbers.quadrillion;
-            case 16:
-                // 10 000 000 000 000 000
-                return this.localeObject.numbers.quadrillion;
-            case 17:
-                // 100 000 000 000 000 000
-                return this.localeObject.numbers.quadrillion;
-            case 18:
-                // 1 000 000 000 000 000 000
-                return this.localeObject.numbers.quintillion;
-            default:
-                return lenZeros.toString();
-        }
+        const numbers = Object.keys(this.localeObject.numbers);
+        const len = lenZeros % numbers.length;
+        return Object.values(this.localeObject.numbers)[len];
     }
 
     /**
