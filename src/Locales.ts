@@ -12,20 +12,24 @@ export interface DeclinationLocale {
     };
 }
 
+export type Numbers =
+    | "thousand"
+    | "million"
+    | "billion"
+    | "trillion"
+    | "quadrillion"
+    | "quintillion"
+    | "sexillion";
+
 export interface LocaleObject extends DeclinationLocale {
     locale: string;
-    numbers: {
-        thousand: string;
-        million: string;
-        billion: string;
-        trillion: string;
-        quadrillion: string;
-        quintillion: string;
-    };
+    excludeNumbers?: Numbers[];
+    numbers: Record<Numbers, string>;
 }
 
 export const ru_RU: LocaleObject = {
     locale: "ru_RU",
+    excludeNumbers: ["billion", "million", "thousand"],
     useDeclination: true,
     useCountZerosAfterFirstDigit: true,
     declinations: {
@@ -40,6 +44,7 @@ export const ru_RU: LocaleObject = {
         trillion: "триллион",
         quadrillion: "квадриллион",
         quintillion: "квинтиллион",
+        sexillion: "сиксилион",
     },
 };
 
@@ -52,6 +57,7 @@ export const en_US: LocaleObject = {
         trillion: "trillion",
         quadrillion: "quadrillion",
         quintillion: "quintillion",
+        sexillion: "sextillion",
     },
 };
 
@@ -64,5 +70,6 @@ export const de_DE: LocaleObject = {
         trillion: "billion",
         quadrillion: "quadrilliarde",
         quintillion: "quintillion",
+        sexillion: "sextillion",
     },
 };

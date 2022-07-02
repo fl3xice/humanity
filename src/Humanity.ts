@@ -84,7 +84,8 @@ class Humanity {
     }
 
     private switchWord(lenZeros: number): string {
-        if (lenZeros < 5 || lenZeros > 18) {
+        const numbers = Object.keys(this.localeObject.numbers);
+        if (lenZeros < 5 || lenZeros > (numbers.length + 1) * 3) {
             return lenZeros.toString();
         }
 

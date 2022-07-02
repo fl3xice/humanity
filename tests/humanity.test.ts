@@ -27,17 +27,17 @@ Deno.test("Test humanity class", () => {
         "1 quadrillion"
     );
     assertEquals(
-        Humanity.number(10000000000000000),
+        Humanity.number(10000000000000000n),
         "10 quadrillion",
         "10 quadrillion"
     );
     assertEquals(
-        Humanity.number(100000000000000000),
+        Humanity.number(100000000000000000n),
         "100 quadrillion",
         "100 quadrillion"
     );
     assertEquals(
-        Humanity.number(1000000000000000000),
+        Humanity.number(1000000000000000000n),
         "1 quintillion",
         "1 quintillion"
     );
@@ -46,6 +46,22 @@ Deno.test("Test humanity class", () => {
     assertEquals(Humanity.number(2500000000), "2 billion", "2 billion");
     // 200 000 000 000
     assertEquals(Humanity.number(250000000000), "200 billion", "200 billion");
+
+    assertEquals(
+        Humanity.number(10000000000000000000n),
+        "10 quintillion",
+        "10 quintillion"
+    );
+    assertEquals(
+        Humanity.number(100000000000000000000n),
+        "100 quintillion",
+        "100 quintillion"
+    );
+    assertEquals(
+        Humanity.number(1000000000000000000000n),
+        "1 sextillion",
+        "1 sextillion"
+    );
 });
 
 Deno.test("Ru Locale with declinations", () => {
@@ -78,6 +94,7 @@ Deno.test("Custom Locale", () => {
             trillion: "xe",
             quadrillion: "fa",
             quintillion: "ier",
+            sexillion: "sex",
         },
     });
 
