@@ -218,10 +218,14 @@ Deno.test("Custom English", () => {
 
     CustomEnglish.binarySuffixes = {
         Bytes: "bytes",
+        GigaBytes: "gigiabytes",
+        TeraBytes: "terabytes",
     };
 
-    assertEquals(
-        createCustomHumanity(CustomEnglish).binarySuffix(25, 0),
-        "25 bytes"
-    );
+    const Humanity = createCustomHumanity(CustomEnglish);
+
+    assertEquals(Humanity.binarySuffix(25, 0), "25 bytes");
+    assertEquals(Humanity.binarySuffix(8000000000, 0), "7 gigiabytes");
+    assertEquals(Humanity.binarySuffix(80000000, 0), "76 MB");
+    assertEquals(Humanity.binarySuffix(8000005454400, 0), "7 terabytes");
 });

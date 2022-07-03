@@ -19,13 +19,33 @@ class Humanity {
         } else {
             this.localeObject = this.getLocale(locale);
         }
+        type KeysOfUnion<T> = T extends T ? keyof T : string;
+
+        /**
+         * MAP OF SUFFIXES
+         */
+        const mapSuffixes = {
+            Bytes: 0,
+            KiloBytes: 1,
+            MegaBytes: 2,
+            GigaBytes: 3,
+            TeraBytes: 4,
+            PetaBytes: 5,
+            ExaBytes: 6,
+            ZettaBytes: 7,
+            YottaBytes: 8,
+        };
 
         // Replace suffixes on custom suffixes
-        if (this.localeObject.binarySuffixes !== undefined) {
-            const newSuffixes = Object.values(this.localeObject.binarySuffixes);
-            this.suffixes.forEach((x, i) => {
-                this.suffixes[i] = newSuffixes[i] ? newSuffixes[i] : x;
-            });
+        if (this.localeObject.binarySuffixes) {
+            Object.entries(this.localeObject.binarySuffixes).forEach(
+                (value) => {
+                    const key = value[0];
+                    const valueOfKey = value[1];
+                    // @ts-ignore - typescript doesn't know about this
+                    this.suffixes[mapSuffixes[key]] = valueOfKey;
+                }
+            );
         }
     }
 
@@ -180,7 +200,7 @@ class Humanity {
     }
 
     /**
-     * Convert arabic number to roman roman numerals
+     * Convert arabic number to roman numerals
      * @param n Number to be converted to a roman numerals
      * @returns string
      */
