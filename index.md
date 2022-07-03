@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## Humanity
 
 You can use the [editor on GitHub](https://github.com/fl3xice/humanity/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
