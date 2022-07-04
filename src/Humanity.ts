@@ -351,25 +351,24 @@ class Humanity {
 
         result.push(data.slice(i));
 
-        result = result.map((word, i) => {
-            if (isSnakeCase && i != 0) {
-                return word.slice(1);
-            }
+        result = result
+            .map((word, i) => {
+                if (isSnakeCase && i != 0) {
+                    return word.slice(1);
+                }
 
-            if (i == 0) {
-                return word.slice(0, 1).toUpperCase() + word.slice(1);
-            }
+                if (i == 0) {
+                    return word.slice(0, 1).toUpperCase() + word.slice(1);
+                }
 
-            return word.toLowerCase();
-        });
-
-        console.log(result.join(" "));
-
+                return word.toLowerCase();
+            })
+            .filter((word) => word.length > 1);
         function addWordToMap(index: number) {
             wordsMap.push(index);
         }
 
-        return "";
+        return result.join(" ");
     }
 
     /**

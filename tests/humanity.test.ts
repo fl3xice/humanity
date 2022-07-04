@@ -66,7 +66,7 @@ Deno.test("Test humanity class", () => {
     );
 });
 
-Deno.test("Ru Locale with declinations", () => {
+Deno.test("Ru locale with declinations", () => {
     const Humanity = createHumanity("ru_RU");
 
     assertEquals(Humanity.number(1), "1", "one");
@@ -327,4 +327,11 @@ Deno.test("DateTime", () => {
     MapDates.forEach((map) => {
         assertEquals(Humanity.dateTime.difference(map.e, map.e2), map.result);
     });
+});
+
+Deno.test("Human case", () => {
+    assertEquals(Humanity.humanCase("isCamelCase"), "Is camel case");
+    assertEquals(Humanity.humanCase("IsUpperCamelCase"), "Is upper camel case");
+    assertEquals(Humanity.humanCase("is_snake_case"), "Is snake case");
+    assertEquals(Humanity.humanCase("main Field"), "Main field");
 });
