@@ -294,6 +294,101 @@ class Humanity {
 
         return arr.slice(0, n).join(SEPARATOR) + "...";
     }
+
+    humanCase(data: string): string {
+        const lengthOfString = data.length;
+
+        const wordsMap: number[] = [];
+
+        let isCamelCase = false;
+        let isUpperCamelCase = false;
+        let isSnakeCase = false;
+
+        if (lengthOfString <= 1) {
+            return data;
+        }
+
+        const firstLetter = data.charAt(0);
+
+        // Check first letter for future check for camelCase
+        if (this.isUpperCase(firstLetter)) {
+            isUpperCamelCase = true;
+        } else {
+            isCamelCase = true;
+        }
+
+        // Check if string is a snake case
+        if (data.includes("_")) {
+            isSnakeCase = true;
+        }
+
+        // Change state two variables if detecting that string is not camelCase
+        isCamelCase = !isSnakeCase;
+        isUpperCamelCase = !isSnakeCase;
+
+        // Foreach all string by char to char
+        for (let i = 1; i < lengthOfString; i++) {
+            const letter = data.charAt(i);
+
+            // Check if letter is upper case
+            if (this.isUpperCase(letter) && (isUpperCamelCase || isCamelCase)) {
+                addWordToMap(i);
+            }
+
+            // Check if is underscore
+            if (letter == "_") {
+                addWordToMap(i);
+            }
+        }
+
+        let result: string[] = [];
+        let i = 0;
+
+        wordsMap.forEach((word) => {
+            result.push(data.slice(i, word));
+            i = word;
+        });
+
+        result.push(data.slice(i));
+
+        result = result.map((word, i) => {
+            if (isSnakeCase && i != 0) {
+                return word.slice(1);
+            }
+
+            if (i == 0) {
+                return word.slice(0, 1).toUpperCase() + word.slice(1);
+            }
+
+            return word.toLowerCase();
+        });
+
+        console.log(result.join(" "));
+
+        function addWordToMap(index: number) {
+            wordsMap.push(index);
+        }
+
+        return "";
+    }
+
+    /**
+     * If char is uppercase
+     * @param char
+     * @returns boolean
+     */
+    isUpperCase(char: string): boolean {
+        return char.toUpperCase() === char;
+    }
+
+    /**
+     * If char is lowercase
+     * @param char
+     * @returns boolean
+     */
+    isLowerCase(char: string): boolean {
+        return char.toLowerCase() === char;
+    }
 }
 
 /**
