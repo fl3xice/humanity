@@ -75,6 +75,7 @@ console.log(Humanity.number(500000)); // 500thousand
 -   toRoman(n: number): string <br/> `Humanity.toRoman(505) // DV`
 -   binarySuffix(n: number, fixed = 2): string <br/> `Humanity.binarySuffix(500, 0) // 500 B`
 -   arrayToText(arr: any[], n = 2): string <br/> `Humanity.arrayToText(["Dustin", "Leda", "Tristin", "Maybelle", "Dee", "Stephon"], 3) // Dustin, Leda, Tristin and 3 others`
+-   dateTime.difference(dateFirst: Date, dateAfter: Date): string <br/> `Humanity.dateTime.difference(1656532800000, 1659211200000); // 4 weeks ago`
 
 ## Supported languages by default
 
