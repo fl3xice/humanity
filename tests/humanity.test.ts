@@ -277,3 +277,54 @@ Deno.test("array to text", () => {
         "Dustin, Leda, Tristin, Maybelle, Dee, Stephon..."
     );
 });
+
+Deno.test("DateTime", () => {
+    const MapDates = [
+        {
+            // 04 Jul 2014 15:20:50
+            e: new Date(1404472850000),
+            // 04 Jul 2022 15:20:50
+            e2: new Date(1656933650000),
+            result: "7 years ago",
+        },
+        {
+            // 04 Jul 2022 15:20:50
+            e: new Date(1656933650000),
+            // 04 Jul 2022 15:20:55
+            e2: new Date(1656933655000),
+            result: "5 seconds ago",
+        },
+        {
+            // 04 Jul 2022 15:20:55
+            e: new Date(1656933655000),
+            // 04 Jul 2022 15:23:55
+            e2: new Date(1656933835000),
+            result: "3 minutes ago",
+        },
+        {
+            // 04 Jul 2022 15:20:55
+            e: new Date(1656933655000),
+            // 04 Jul 2022 15:20:55
+            e2: new Date(1656933655000),
+            result: "just now",
+        },
+        {
+            // 04 Jul 2022 16:20:55
+            e: new Date(1656933835000),
+            // 04 Jul 2022 15:20:55
+            e2: new Date(1656937435000),
+            result: "1 hours ago",
+        },
+        {
+            // 30 Jun 2022 00:00:0
+            e: new Date(1656532800000),
+            // 30 Jul 2022 00:00:0
+            e2: new Date(1659211200000),
+            result: "4 weeks ago",
+        },
+    ];
+
+    MapDates.forEach((map) => {
+        assertEquals(Humanity.dateTime.difference(map.e, map.e2), map.result);
+    });
+});

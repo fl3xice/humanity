@@ -1,3 +1,4 @@
+import DateTime from "./DateTimeHumanity.ts";
 import { en_US, ru_RU, de_DE, LocaleObject } from "./Locales.ts";
 
 export type Feature = "spacing";
@@ -6,8 +7,9 @@ export type LocaleHumanity = "ru_RU" | "en_US" | "de_DE" | "custom";
 class Humanity {
     private localeObject: LocaleObject;
     private withSpace = true;
-
     private suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+
+    public dateTime = DateTime;
 
     /**
      * Constructor for setting locale
