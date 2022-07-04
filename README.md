@@ -45,6 +45,9 @@ console.log(Humanity.number(500000)); // 500 000
 import { createCustomHumanity } from "https://deno.land/x/humanity/mod.ts";
 const Humanity = createCustomHumanity({
     locale: "custom",
+    words: {
+        ...DefaultLocales.en_US.words,
+    },
     numbers: {
         thousand: "th",
         million: "m",
@@ -71,6 +74,7 @@ console.log(Humanity.number(500000)); // 500thousand
 -   truncate(n: string | number | bigint, lengthMax: number): string <br/> `Humanity.truncate("Humanity is a library for humanizing data in a human-readable form.", 24) // "Humanity is a library fo..."`
 -   toRoman(n: number): string <br/> `Humanity.toRoman(505) // DV`
 -   binarySuffix(n: number, fixed = 2): string <br/> `Humanity.binarySuffix(500, 0) // 500 B`
+-   arrayToText(arr: any[], n = 2): string <br/> `Humanity.arrayToText(["Dustin", "Leda", "Tristin", "Maybelle", "Dee", "Stephon"], 3) // Dustin, Leda, Tristin and 3 others`
 
 ## Supported languages by default
 

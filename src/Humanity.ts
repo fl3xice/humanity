@@ -254,6 +254,44 @@ class Humanity {
             this.suffixes[i]
         }`;
     }
+
+    /**
+     * Collection data to string
+     * ```typescript
+     * const chatMembers = ["Dustin", "Leda", "Tristin", "Maybelle", "Dee", "Stephon"];
+     * const r = Humanity.arrayToText(chatMembers, 3);
+     * console.log(r);
+     * // Output: Dustin, Leda, Tristin and 3 others
+     * ```
+     * @param arr Array with your content
+     * @param n length to slice of array
+     * @returns string
+     */
+    arrayToText<T = string>(arr: T[], n = 2): string {
+        const SEPARATOR = this.localeObject.separator + " ";
+
+        if (n == 0 || arr.length == 1) {
+            return String(arr[0]);
+        }
+
+        if (arr.length < n) {
+            return arr.slice(0).join(SEPARATOR);
+        }
+
+        if (arr.length > n) {
+            return (
+                arr.slice(0, n).join(SEPARATOR) +
+                " " +
+                this.localeObject.words.and +
+                " " +
+                (arr.length - n) +
+                " " +
+                this.localeObject.words.others
+            );
+        }
+
+        return arr.slice(0, n).join(SEPARATOR) + "...";
+    }
 }
 
 /**

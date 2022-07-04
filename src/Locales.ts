@@ -35,8 +35,13 @@ export type BinarySuffixes = {
 
 export interface LocaleObject extends DeclinationLocale {
     locale: string;
+    separator: string;
     excludeNumbers?: NumberType[];
     binarySuffixes?: BinarySuffixes;
+    words: {
+        and: string;
+        others: string;
+    };
     numbers: Record<NumberType, string>;
 }
 
@@ -44,10 +49,15 @@ export const ru_RU: LocaleObject = {
     locale: "ru_RU",
     useDeclination: true,
     useCountZerosAfterFirstDigit: true,
+    separator: ",",
     declinations: {
         plural: "ов",
         pluar_singular: "а",
         singular: "",
+    },
+    words: {
+        and: "и",
+        others: "других",
     },
     numbers: {
         thousand: "тысяч",
@@ -62,6 +72,11 @@ export const ru_RU: LocaleObject = {
 
 export const en_US: LocaleObject = {
     locale: "en_US",
+    separator: ",",
+    words: {
+        and: "and",
+        others: "others",
+    },
     numbers: {
         thousand: "thousand",
         million: "million",
@@ -75,6 +90,11 @@ export const en_US: LocaleObject = {
 
 export const de_DE: LocaleObject = {
     locale: "de_DE",
+    separator: ",",
+    words: {
+        and: "und",
+        others: "andere",
+    },
     numbers: {
         thousand: "tausend",
         million: "million",

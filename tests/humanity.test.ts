@@ -89,6 +89,10 @@ Deno.test("Ru Locale with declinations", () => {
 Deno.test("Custom Locale", () => {
     const Humanity = createCustomHumanity({
         locale: "custom",
+        separator: ",",
+        words: {
+            ...DefaultLocales.en_US.words,
+        },
         numbers: {
             thousand: "tis",
             million: "er",
@@ -114,7 +118,11 @@ Deno.test("Disabling features", () => {
 Deno.test("Test humanity class", () => {
     const Humanity = createCustomHumanity({
         locale: "custom",
+        separator: ",",
         excludeNumbers: ["billion"],
+        words: {
+            ...DefaultLocales.en_US.words,
+        },
         numbers: {
             thousand: "thousand",
             million: "million",
@@ -228,4 +236,44 @@ Deno.test("Custom English", () => {
     assertEquals(Humanity.binarySuffix(8000000000, 0), "7 gigiabytes");
     assertEquals(Humanity.binarySuffix(80000000, 0), "76 MB");
     assertEquals(Humanity.binarySuffix(8000005454400, 0), "7 terabytes");
+});
+
+Deno.test("array to text", () => {
+    const chatMembers = [
+        "Dustin",
+        "Leda",
+        "Tristin",
+        "Maybelle",
+        "Dee",
+        "Stephon",
+    ];
+
+    assertEquals(
+        Humanity.arrayToText(chatMembers, 3),
+        "Dustin, Leda, Tristin and 3 others"
+    );
+
+    const DEHumanity = createHumanity("de_DE");
+
+    assertEquals(
+        DEHumanity.arrayToText(chatMembers, 3),
+        "Dustin, Leda, Tristin und 3 andere"
+    );
+
+    const RUHumanity = createHumanity("ru_RU");
+
+    assertEquals(
+        RUHumanity.arrayToText(chatMembers, 3),
+        "Dustin, Leda, Tristin и 3 других"
+    );
+
+    assertEquals(
+        Humanity.arrayToText(chatMembers, 2),
+        "Dustin, Leda and 4 others"
+    );
+
+    assertEquals(
+        Humanity.arrayToText(chatMembers, 6),
+        "Dustin, Leda, Tristin, Maybelle, Dee, Stephon..."
+    );
 });
