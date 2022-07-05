@@ -4,7 +4,7 @@
 ![GitHub](https://img.shields.io/github/license/fl3xice/humanity)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/fl3xice/humanity)
 [![npm](https://img.shields.io/npm/v/humanity-deno)](https://www.npmjs.com/package/humanity-deno)
-[[![deno module](https://shield.deno.dev/x/humanity)](https://deno.land/x/humanity)](https://deno.land/x/humanity)
+[![deno module](https://shield.deno.dev/x/humanity)](https://deno.land/x/humanity)
 
 ![GitHub Repo stars](https://img.shields.io/github/stars/fl3xice/humanity?style=social)
 
